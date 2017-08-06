@@ -4,11 +4,11 @@
 <!--和接口路径和名称保持一致，MyBATIS会自动帮我们找到这个 Mapper-->
 <mapper namespace="com.freedom.mapper.RoleMapper">
     <!--  -->
-    <select id="getRole" parameterType="long" resultType="com.freedom.po.Role">
+    <select id="getRole" parameterType="long" resultType="role">
         select id,role_name as roleName,note from t_role where id=#{id}
     </select>
 
-    <insert id="insertRole" parameterType="com.freedom.po.Role">
+    <insert id="insertRole" parameterType="role">
         insert into t_role(role_name, note) values (#{roleName},#{note})
     </insert>
 
