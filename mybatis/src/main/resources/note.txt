@@ -1,0 +1,16 @@
+1、映射文件命名方式
+   User.xml 原始ibatis命名方式
+   UserMapper.xml  mapper代理开发映射文件命名方式
+2、namespace 命名空间
+   对sql进行分类化的管理 sql隔离
+   在mapper代理方法开发中有重要作用
+3、sql标签 <select,insert,update,delete>属性
+   id 标识映射文件中的sql 封装到mappedStatement对象中,称为statement的id
+4、模糊查询
+   如果传入简单类型 只能使用${value} 防止注入sql
+
+   #{} 占位符
+   ${} 拼接符  会引起sql注入
+
+   selectOne
+   selectList

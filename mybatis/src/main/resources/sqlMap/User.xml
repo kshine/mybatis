@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--和接口路径和名称保持一致，MyBATIS会自动帮我们找到这个 Mapper-->
+
+<!--对sql进行分类化的管理 sql隔离 在mapper代理方法开发中有重要作用-->
+<!--id 标识映射文件中的sql 封装到mappedStatement对象中,称为statement的id-->
+<!--#{id}：表示接受输入的参数,名称是id,如果输入参数是简单类型，参数名可以任意 value或者其它名称-->
 <mapper namespace="test">
     <select id="findUserById" parameterType="int" resultType="com.freedom.po.User" >
         SELECT * FROM USER WHERE ID = #{id}
+    </select>
+
+    <!--resultType 单条记录所映射的java类型
+        模糊查询 ${} 表示拼接sql串，将接收到参数的内容不加任何修饰拼接在sql中
+        如果传入简单类型 只能使用${value} 防止注入sql-->
+    <select id="findUserByName" parameterType="String" resultType="com.freedom.po.User">
+        SELECT * FROM  USER WHERE username LIKE '%${value}%';
     </select>
 </mapper>

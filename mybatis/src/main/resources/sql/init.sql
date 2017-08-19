@@ -13,7 +13,6 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27  DEFAULT CHARSET=utf8;
 
-DROP TABLE user;
 
 insert  into `user`(`id`,`username`,`birthday`,`sex`,`address`)
 values
