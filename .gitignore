@@ -1,4 +1,4 @@
 # IntelliJ project files
 out
 gen
-mybatis2/target/
+*/target/
