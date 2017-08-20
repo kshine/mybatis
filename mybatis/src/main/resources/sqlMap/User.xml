@@ -16,4 +16,21 @@
     <select id="findUserByName" parameterType="String" resultType="com.freedom.po.User">
         SELECT * FROM  USER WHERE username LIKE '%${value}%';
     </select>
+
+    <insert id="insertUser" parameterType="com.freedom.po.User">
+       <selectKey keyProperty="id" resultType="int" order="AFTER">
+           SELECT LAST_INSERT_ID()
+       </selectKey>
+        INSERT INTO USER (username,birthday,sex,address) VALUES (#{userName},#{birthday},#{sex},#{address})
+    </insert>
+
+    <delete id="deleteUserById" parameterType="int">
+        DELETE FROM USER WHERE ID = #{id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.freedom.po.User">
+        <!-- userName #{}内名称与POJO属性要一致 where内属必须存在-->
+        UPDATE USER SET username = #{userName},birthday= #{birthday},sex = #{sex},address =#{address} WHERE ID = #{id}
+    </update>
+
 </mapper>

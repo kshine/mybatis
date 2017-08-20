@@ -1,16 +1,41 @@
 1、映射文件命名方式
    User.xml 原始ibatis命名方式
    UserMapper.xml  mapper代理开发映射文件命名方式
+
 2、namespace 命名空间
    对sql进行分类化的管理 sql隔离
    在mapper代理方法开发中有重要作用
+
 3、sql标签 <select,insert,update,delete>属性
    id 标识映射文件中的sql 封装到mappedStatement对象中,称为statement的id
+
 4、模糊查询
    如果传入简单类型 只能使用${value} 防止注入sql
 
-   #{} 占位符
+   #{} 占位符  占位符内的参数名称与POJO的名字要么一致
    ${} 拼接符  会引起sql注入
 
    selectOne
    selectList
+
+5、insert id自增的时候 可以不写入SQL
+   自增主键回传
+   mysql函数获取刚插入记录的自增主键
+   select last_insert_id()
+
+   <selectKey keyProperty="id" resultType="int" order="AFTER">
+       SELECT LAST_INSERT_ID()
+   </selectKey>
+
+   非自增主键回传 提前获取并设置 sql语句字段要完整
+    <selectKey keyProperty="id" resultType="String" order="BEFORE">
+       SELECT uuid()
+   </selectKey>
+
+
+   dao方法开发
+   SqlSession 定义在方法体内
+
+   原始DAO  接口+实现类
+   mapper+代理的方法  mapper接口
+
