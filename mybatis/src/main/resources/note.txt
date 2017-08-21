@@ -33,9 +33,20 @@
    </selectKey>
 
 
-   dao方法开发
+6、dao方法开发
    SqlSession 定义在方法体内
 
    原始DAO  接口+实现类
-   mapper+代理的方法  mapper接口
+   大量模板方法
+   方法泛型 无法发现类型错误
 
+   mapper+代理的方法 开发规范
+    mapper接口 相当于dao接口
+    1编写mapper.xml映射文件
+    2namespace 相当于mapper接口地址
+    3mapper接口方法名与sql id一致  输入，输出参数类型一致
+    主要是对重复代码进行统一生成
+
+    mapper接口只能有一个参数 是否影响编码    使用pojo
+    持久层方法的参数可以使用包装类型， map
+    service层不建议  不利于编码

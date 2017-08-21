@@ -1,10 +1,10 @@
-package com.freedom.dao;
+package com.freedom.mapper;
 
 import com.freedom.po.User;
 
 import java.util.List;
 
-public interface UserDao {
+public interface UserMapper {
 
     public User findUserById(int id) throws Exception;
 
