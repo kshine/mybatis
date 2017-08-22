@@ -1,0 +1,44 @@
+全局配置文件  必须按照此顺序
+1.properties
+    将数据库连接参数单独配置在db.properties中  可以引入文件或者单独配置属性
+    <properties resource="db.properties">
+        <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="123456"/>-->
+    </properties>
+
+2.settings 全局参数配置
+    调整一些配置参数，按需设置   缓存等类型
+
+3.typeAliases  别名
+    package自动扫描包中的PO类  自动定义别名，即类名(首字母大小写)
+    <typeAliases>
+          <typeAlias type="com.freedom.po.User" alias="user"/>
+          <package name="com.freedom.po"/>
+    </typeAliases>
+
+4.typeHandlers 类型处理器
+  jdbc 与java类型的转换
+
+5.mappers加载
+        单个加载
+        <mapper resource="sqlMap/User.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
+
+        通过mapper接口加载映射文件  mapper接口与xml映射文件  名称一致 且在一个目录中
+
+        <mapper class="com.freedom.mapper.UserMapper"/>
+        xml需要打包到编译目录
+        <resources>
+             <resource>
+                  <directory>src/main/java</directory>
+                      <includes>
+                          <include>**/*.xml</include>
+                      </includes>
+                  <filtering>false</filtering>
+             </resource>
+        </resources>
+
+        批量加载  同样遵循 mapper接口与xml映射文件  名称一致 且在一个目录中
+        <package name="com.freedom.mapper"/>
