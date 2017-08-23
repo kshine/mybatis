@@ -32,5 +32,10 @@
         <!-- userName #{}内名称与POJO属性要一致 where内属必须存在-->
         UPDATE USER SET username = #{userName},birthday= #{birthday},sex = #{sex},address =#{address} WHERE ID = #{id}
     </update>
+    
+    <!--传递hashMap-->
+    <select id="findUserByHashMap" parameterType="hashMap" resultType="user"  >
+        select * from user where id=#{id} and username like '%${username}%'
+    </select>
 
 </mapper>

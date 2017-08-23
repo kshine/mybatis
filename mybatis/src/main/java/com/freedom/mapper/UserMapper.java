@@ -2,6 +2,7 @@ package com.freedom.mapper;
 
 import com.freedom.po.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface UserMapper {
@@ -13,4 +14,6 @@ public interface UserMapper {
     public void insertUser(User user) throws Exception;
 
     public void deleteUser(int id) throws Exception;
+
+    public List<User> findUserByHashMap(HashMap<String,Object> hashMap) throws Exception;
 }

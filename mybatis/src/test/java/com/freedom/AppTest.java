@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -44,6 +45,18 @@ public class AppTest {
         List<User> userList = userMapper.findUserByName("小明");
         System.out.println(userList);
         sqlSession.close();
+    }
+
+    @Test
+    public void testFindUserByHashMap() throws Exception{
+        SqlSession sqlsession = sqlSessionFactory.openSession();
+        HashMap<String,Object> userMap = new HashMap<String,Object>();
+        userMap.put("id",28);
+        userMap.put("username","大锤");
+        UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
+        List<User> userList = userMapper.findUserByHashMap(userMap);
+        System.out.println(userList);
+        sqlsession.close();
     }
 
 }

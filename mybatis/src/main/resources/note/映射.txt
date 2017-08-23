@@ -1,0 +1,11 @@
+1 输入映射 parameterType
+  类型可以是 简单类型 hashMap 包装类型pojo
+
+  <!--传递hashMap-->
+      <select id="findUserByHashMap" parameterType="hashMap" resultType="user"  >
+          select * from user where id=#{id} and username like '%${username}%'
+   </select>
+
+   HashMap<String,Object> userMap = new HashMap<String,Object>();
+           userMap.put("id",28);
+           userMap.put("username","大锤");
