@@ -4,8 +4,18 @@
   <!--传递hashMap-->
       <select id="findUserByHashMap" parameterType="hashMap" resultType="user"  >
           select * from user where id=#{id} and username like '%${username}%'
-   </select>
+  </select>
 
-   HashMap<String,Object> userMap = new HashMap<String,Object>();
+  HashMap<String,Object> userMap = new HashMap<String,Object>();
            userMap.put("id",28);
            userMap.put("username","大锤");
+
+  综合查询
+
+  自定义包装类型的pojo 做查询参数 复杂查询条件
+  基础类用工具生成 不懂
+  扩展类可用于修改
+  public class UserCustom extends User
+
+2输出映射 resultType
+  sql查询出来的列名与pojo的属性名一致

@@ -3,6 +3,8 @@ package com.freedom;
 
 import com.freedom.mapper.UserMapper;
 import com.freedom.po.User;
+import com.freedom.po.UserCustom;
+import com.freedom.po.UserQueryVo;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -56,6 +58,20 @@ public class AppTest {
         UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
         List<User> userList = userMapper.findUserByHashMap(userMap);
         System.out.println(userList);
+        sqlsession.close();
+    }
+
+    @Test
+    public void testFindUserList() throws Exception {
+        SqlSession sqlsession = sqlSessionFactory.openSession();
+        UserCustom userCustom = new UserCustom();
+        userCustom.setSex("1");
+        userCustom.setUserName("小明");
+        UserQueryVo userQueryVo = new UserQueryVo();
+        userQueryVo.setUserCustom(userCustom);
+        UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
+        List<UserCustom> userCustomList = userMapper.findUserList(userQueryVo);
+        System.out.println(userCustomList);
         sqlsession.close();
     }
 

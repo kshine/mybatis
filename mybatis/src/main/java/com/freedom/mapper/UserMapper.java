@@ -1,11 +1,15 @@
 package com.freedom.mapper;
 
 import com.freedom.po.User;
+import com.freedom.po.UserCustom;
+import com.freedom.po.UserQueryVo;
 
 import java.util.HashMap;
 import java.util.List;
 
 public interface UserMapper {
+
+    public List<UserCustom> findUserList(UserQueryVo userQueryVo) throws Exception;
 
     public User findUserById(int id) throws Exception;
 
