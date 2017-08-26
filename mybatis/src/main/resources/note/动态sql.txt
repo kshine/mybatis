@@ -1,0 +1,33 @@
+对sql语句进行灵活操作，表达式
+where 自动判断 去掉sql条件里面的第一个and
+if  test属性 判断条件
+
+<where>
+
+    <if test=" xxx.xxx != null and xxx.xxx != ''">
+        and xxx=
+    </if>
+
+</where>
+
+sql片段 抽取常用字段
+id 唯一标识  常常 针对单表  不要包括<where>
+<sql id="">
+
+</sql>
+如果sql片段没有定义在本mapper.xml中，则需要加namespace.id
+引用sql片段  <include refid="sql片段id" ></include>
+
+<foreach> 片段
+  queryVo对象添加对应属性
+
+  and  ( or ) 模式
+ <foreach collection="ids" item="item_id" open="and (" close=")" separator="or">
+            id=#{item_id}
+ </foreach>
+
+ and ( in ) 模式
+
+  <foreach collection="ids" item="item_id" open="and id in  (" close=")" separator=",">
+             #{item_id}
+  </foreach>

@@ -9,9 +9,40 @@
 
 
     <select id="findUserList" parameterType="UserQueryVo" resultType="UserCustom">
-        select * from user where sex = #{userCustom.sex} and username like '%${userCustom.username}%'
+        select * from user where sex = #{userCustom.sex} and username like '%${userCustom.userName}%'
     </select>
 
+    <select id="findUserCount" parameterType="UserQueryVo" resultType="int">
+        select count(1) from user
+        <where>
+            <if test="userCustom != null">
+                <if test="userCustom.sex != null and userCustom.sex !='' ">
+                    and sex = #{userCustom.sex}
+                </if>
+                <if test="userCustom.userName != null and userCustom.userName !='' ">
+                    and username like '%${userCustom.userName}%'
+                </if>
+            </if>
+        </where>
+
+        <foreach collection="ids" item="item_id" open="and id in  (" close=")" separator=",">
+            #{item_id}
+        </foreach>
+
+        <!--<foreach collection="ids" item="item_id" open="and (" close=")" separator="or">-->
+            <!--id=#{item_id}-->
+        <!--</foreach>-->
+
+    </select>
+
+    <resultMap id="userResultMap" type="user">
+        <id column="id_" property="id"></id>
+        <result column="username_" property="userName"></result>
+    </resultMap>
+
+    <select id="findUserByIdResultMap" parameterType="int" resultMap="userResultMap">
+        SELECT id id_,username username_ FROM USER WHERE ID = #{id}
+    </select>
 
     <select id="findUserById" parameterType="int" resultType="com.freedom.po.User" >
         SELECT * FROM USER WHERE ID = #{id}

@@ -11,6 +11,10 @@ public interface UserMapper {
 
     public List<UserCustom> findUserList(UserQueryVo userQueryVo) throws Exception;
 
+    public int findUserCount(UserQueryVo userQueryVo) throws Exception;
+
+    public User findUserByIdResultMap(int id) throws Exception;
+
     public User findUserById(int id) throws Exception;
 
     public List<User> findUserByName(String name) throws Exception;

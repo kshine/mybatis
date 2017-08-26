@@ -17,5 +17,21 @@
   扩展类可用于修改
   public class UserCustom extends User
 
-2输出映射 resultType
-  sql查询出来的列名与pojo的属性名一致
+2 输出映射 resultType
+  sql查询出来的列名与pojo的属性名一致 才可以映射成功
+  全部不一致就不会生成对象，有一个属性一直就会创建对象
+
+  输出简单对象
+  查询出来的结果只有一行且一列
+  输出pojo对象或列表  在mapper.xml中resultType指定的类型是一样的
+                   在mapper.java中指定的方法返回值不同   pojo 或者List<pojo>
+
+  resultMap
+  查询出来的列名与pojo的属性不一样 定义一个resultMap对pojo和列名属性之间做一个对应关系
+  id 主键  result 其他列  property pojo属性名
+  <resultMap id="userResultMap" type="user">
+          <id column="id_" property="id"></id>
+          <result column="username_" property="userName"></result>
+  </resultMap>
+
+  在sql中 resultMap属性中指定对应id

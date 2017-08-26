@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -75,4 +76,32 @@ public class AppTest {
         sqlsession.close();
     }
 
+    @Test
+    public void testFindUserCount() throws Exception {
+        SqlSession sqlsession = sqlSessionFactory.openSession();
+        UserCustom userCustom = new UserCustom();
+        userCustom.setSex("1");
+//        userCustom.setUserName("小明");
+        UserQueryVo userQueryVo = new UserQueryVo();
+        userQueryVo.setUserCustom(userCustom);
+
+        List<Integer> idList = new ArrayList<Integer>();
+        idList.add(10);
+        idList.add(28);
+        userQueryVo.setIds(idList);
+
+        UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
+        int userCount = userMapper.findUserCount(userQueryVo);
+        System.out.println(userCount);
+        sqlsession.close();
+    }
+
+    @Test
+    public void testFindUserByIdResultMap() throws Exception {
+        SqlSession sqlsession = sqlSessionFactory.openSession();
+        UserMapper userMapper = sqlsession.getMapper(UserMapper.class);
+        User user = userMapper.findUserByIdResultMap(28);
+        System.out.println(user);
+        sqlsession.close();
+    }
 }
