@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findUserById(int id) throws Exception {
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        User user =sqlSession.selectOne("test.findUserById",id);
+        User user =sqlSession.selectOne("findUserById",id);
         sqlSession.close();
         return user;
     }

@@ -1,5 +1,7 @@
 package com.freedom;
 
+import com.freedom.dao.UserDao;
+import com.freedom.dao.UserDaoImpl;
 import com.freedom.po.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -15,11 +17,15 @@ import java.util.List;
 
 public class App 
 {
-    public static void main( String[] args ) throws IOException, ParseException {
+    public static void main( String[] args ) throws Exception {
         String resource = "mybatis.xml";
         InputStream inputSteam = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputSteam);
         SqlSession sqlSession =sqlSessionFactory.openSession();
+
+        UserDao userDao = new UserDaoImpl(sqlSessionFactory);
+        User user =userDao.findUserById(1);
+        System.out.println(user);
 
 //        findUserById(sqlSession,1);
 
@@ -34,9 +40,9 @@ public class App
 
 //        deleteUser(sqlSession,29);
 
-       User user = findUserById(sqlSession,28);
-       user.setAddress("崔斯特姆");
-       updateUser(sqlSession,user);
+//       User user = findUserById(sqlSession,28);
+//       user.setAddress("崔斯特姆");
+//       updateUser(sqlSession,user);
 
         sqlSession.close();
     }

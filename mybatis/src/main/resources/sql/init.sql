@@ -25,3 +25,56 @@ values
 (26,'王五',NULL,NULL,NULL);
 
 SELECT * FROM USER;
+
+
+CREATE TABLE orders(
+  order_id int(11) not null AUTO_INCREMENT,
+  user_id int(11) not null COMMENT '用户ID',
+  order_num VARCHAR(32) NOT NULL COMMENT '订单号',
+  createtime DATETIME NOT NULL COMMENT '创建时间',
+  note VARCHAR(100) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (order_id),
+  KEY index_order_user_id(user_id),
+  CONSTRAINT fk_order_user FOREIGN KEY (user_id) REFERENCES user(id) on delete no action on update no action
+) ENGINE =InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+insert  into `orders`(`order_id`,`user_id`,`order_num`,`createtime`,`note`)
+values
+  (3,1,'1000010','2015-02-04 13:22:35',NULL),
+  (4,1,'1000011','2015-02-03 13:22:41',NULL),
+  (5,10,'1000012','2015-02-12 16:13:23',NULL);
+
+
+create TABLE items (
+  item_id int(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(32) NOT NULL COMMENT'商品名称',
+  price float(10,1) NOT NULL COMMENT'商品定价',
+  detail text COMMENT'商品描述',
+  pic VARCHAR(64) DEFAULT NULL COMMENT'商品图片',
+  createtime datetime NOT NULL COMMENT'生产日期',
+  PRIMARY KEY(item_id)
+)ENGINE=INNODB AUTO_INCREMENT=4 DEFAULT CHARSET=UTF8;
+
+insert  into `items`(`item_id`,`name`,`price`,`detail`,`pic`,`createtime`)
+values
+  (1,'台式机',3000.0,'该电脑质量非常好！！！！',NULL,'2015-02-03 13:22:53'),
+  (2,'笔记本',6000.0,'笔记本性能好，质量好！！！！！',NULL,'2015-02-09 13:22:57'),
+  (3,'背包',200.0,'名牌背包，容量大质量好！！！！',NULL,'2015-02-06 13:23:02');
+
+
+CREATE TABLE `orderdetail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orders_id` int(11) NOT NULL COMMENT '订单id',
+  `items_id` int(11) NOT NULL COMMENT '商品id',
+  `items_num` int(11) DEFAULT NULL COMMENT '商品购买数量',
+  PRIMARY KEY (id),
+  KEY index_orderdetail_order(orders_id),
+  KEY index_orderdetail_itmes(items_id),
+  CONSTRAINT FK_orderdetail_order FOREIGN KEY (orders_id) REFERENCES orders(order_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT FK_orderdetail_item FOREIGN KEY (items_id) REFERENCES items(item_id) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+
+
+insert  into `orderdetail`(`id`,`orders_id`,`items_id`,`items_num`)
+values (1,3,1,1),(2,3,2,3),(3,4,3,4),(4,4,2,3);
