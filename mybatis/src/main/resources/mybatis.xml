@@ -29,9 +29,8 @@
         </environment>
     </environments>
     <mappers>
-        <!--<mapper resource="sqlMap/User.xml"/>-->
         <mapper resource="mapper/UserMapper.xml"/>
-        <!--<mapper class="com.freedom.mapper.UserMapper"/>-->
-        <!--<package name="com.freedom.mapper"/>-->
+        <mapper resource="mapper/OrderMapper.xml"/>
+        <!--<package name="mapper"/>-->
     </mappers>
 </configuration>
