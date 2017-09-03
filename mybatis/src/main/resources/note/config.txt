@@ -42,3 +42,5 @@
 
         批量加载  同样遵循 mapper接口与xml映射文件  名称一致 且在一个目录中
         <package name="com.freedom.mapper"/>
+
+        idea下面 在resource里面建立和java目录一个的文件 可以在编译打包合并在一起

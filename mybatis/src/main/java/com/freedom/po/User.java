@@ -1,6 +1,7 @@
 package com.freedom.po;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private int id;
@@ -8,6 +9,16 @@ public class User {
     private String sex;
     private Date birthday;
     private String address;
+
+    private List<Order> orderList;
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
+    }
 
     public int getId() {
         return id;
@@ -57,6 +68,7 @@ public class User {
                 ", sex='" + sex + '\'' +
                 ", birthday=" + birthday +
                 ", address='" + address + '\'' +
+                ", orderList=" + orderList +
                 '}';
     }
 }

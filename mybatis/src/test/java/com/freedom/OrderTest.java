@@ -3,10 +3,7 @@ package com.freedom;
 
 import com.freedom.mapper.OrderMapper;
 import com.freedom.mapper.UserMapper;
-import com.freedom.po.OrderCustom;
-import com.freedom.po.User;
-import com.freedom.po.UserCustom;
-import com.freedom.po.UserQueryVo;
+import com.freedom.po.*;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -43,9 +40,32 @@ public class OrderTest {
         sqlSession.close();
     }
 
+    @Test
+    public void findOrdersUserResultMap()throws Exception{
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+        List<Order> orderLIst = orderMapper.findOrdersUserResultMap();
+        System.out.println(orderLIst);
+        sqlSession.close();
+    }
 
+    @Test
+    public void findOrderDetailResultMap()throws Exception{
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+        List<Order> orderLIst = orderMapper.findOrderDetailResultMap();
+        System.out.println(orderLIst);
+        sqlSession.close();
+    }
 
-
+    @Test
+    public void findUserItemsResultMap()throws Exception{
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+        List<User> userLIst = orderMapper.findUserItemsResultMap();
+        System.out.println(userLIst);
+        sqlSession.close();
+    }
 
 
 }

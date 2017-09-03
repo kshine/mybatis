@@ -1,6 +1,7 @@
 package com.freedom.po;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 
@@ -9,6 +10,28 @@ public class Order {
     private String orderNum;
     private Date createTime;
     private String note;
+
+    private User user;
+
+    List<OrderDetail> orderDetails;
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
 
     public int getOrderId() {
         return orderId;
@@ -58,6 +81,8 @@ public class Order {
                 ", orderNum='" + orderNum + '\'' +
                 ", createTime=" + createTime +
                 ", note='" + note + '\'' +
+                ", user=" + user +
+                ", orderDetails=" + orderDetails +
                 '}';
     }
 }

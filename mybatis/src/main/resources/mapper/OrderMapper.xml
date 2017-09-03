@@ -6,7 +6,89 @@
 <!--id 标识映射文件中的sql 封装到mappedStatement对象中,称为statement的id-->
 <!--#{id}：表示接受输入的参数,名称是id,如果输入参数是简单类型，参数名可以任意 value或者其它名称-->
 <mapper namespace="com.freedom.mapper.OrderMapper">
+
+
+
     <select id="findOrdersUser"  resultType="com.freedom.po.OrderCustom">
         select o.*,u.username,u.sex,u.address from orders o,user u where o.user_id=u.id
     </select>
+
+    <resultMap id="OrdersUserResultMap" type="com.freedom.po.Order">
+        <id column="order_id" property="orderId" />
+        <result column="user_id" property="userId"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="createtime" property="createTime"/>
+        <result column="note" property="note"/>
+
+        <association property="user" javaType="com.freedom.po.User">
+            <id column="id" property="id" />
+            <result column="username" property="userName"/>
+            <result column="sex" property="sex"/>
+            <result column="address" property="address"/>
+        </association>
+
+    </resultMap>
+
+    <select id="findOrdersUserResultMap" resultMap="OrdersUserResultMap">
+        select o.*,u.username,u.sex,u.address from orders o,user u where o.user_id=u.id
+    </select>
+
+    <resultMap id="OrderDetailResultMap" type="com.freedom.po.Order" extends="OrdersUserResultMap">
+        <collection property="orderDetails" ofType="com.freedom.po.OrderDetail">
+            <id column="ordersDetails_id" property="id"/>
+            <result column="items_id" property="items_id"/>
+            <result column="items_num" property="items_num"/>
+            <result column="orders_id" property="orders_id"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="findOrderDetailResultMap" resultMap="OrderDetailResultMap">
+        select
+          o.*,u.username,u.sex,u.address,
+          d.id ordersDetails_id,d.items_id,d.items_num,d.orders_id
+        from orders o,user u,orderdetail d
+        where o.user_id=u.id and o.order_id = d.orders_id
+    </select>
+
+    <resultMap id="UserItemsResultMap" type="com.freedom.po.User">
+        <id column="user_id" property="id"/>
+        <result column="username" property="userName"/>
+        <result column="sex" property="sex"/>
+        <result column="address" property="address"/>
+
+        <collection property="orderList" ofType="com.freedom.po.Order">
+            <id column="order_id" property="orderId"/>
+            <result column="user_id" property="userId"/>
+            <result column="order_num" property="orderNum"/>
+            <result column="createtime" property="createTime"/>
+            <result column="note" property="note"/>
+
+            <collection property="orderDetails" ofType="com.freedom.po.OrderDetail">
+                <id column="ordersDetails_id" property="id"/>
+                <result column="items_id" property="items_id"/>
+                <result column="items_num" property="items_num"/>
+                <result column="orders_id" property="orders_id"/>
+
+                      <collection property="itemList" ofType="com.freedom.po.Item">
+                          <id column="items_id" property="item_id"/>
+                          <result column="name" property="item_name"/>
+                          <result column="price" property="item_price"/>
+                          <result column="detail" property="item_detail"/>
+                      </collection>
+            </collection>
+        </collection>
+    </resultMap>
+
+
+    <select id="findUserItemsResultMap" resultMap="UserItemsResultMap">
+      select
+          o.*,u.username,u.sex,u.address,
+          d.id ordersDetails_id,d.items_id,d.items_num,d.orders_id,
+          i.name,i.price,i.detail
+      from orders o,user u,orderdetail d,items i
+      where o.user_id=u.id and o.order_id = d.orders_id and i.item_id = d.items_id
+
+    </select>
+
 </mapper>

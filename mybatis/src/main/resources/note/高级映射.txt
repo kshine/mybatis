@@ -1,1 +1,44 @@
 分析 非空字段 外键字段
+
+一对一映射 resultType   创建扩展bean 和查询valueObject
+一对一映射 resultMap  association
+
+在基础pojo里添加关联查询类
+
+id 唯一键   column 数据库列名   property 类属性名
+resutl
+
+association  property  映射到对应类里面的属性名称  javaType  对应java类
+
+<association property="user" javaType="com.freedom.po.User">
+            <id column="id" property="id" />
+            <result column="username" property="userName"/>
+            <result column="sex" property="sex"/>
+            <result column="address" property="address"/>
+</association>
+
+一对多查询
+
+    <select id="findOrderDetailResultMap" resultMap="OrderDetailResultMap">
+        select
+          o.*,u.username,u.sex,u.address,
+          d.id ordersDetails_id,d.items_id,d.items_num,d.orders_id
+        from orders o,user u,orderdetail d
+        where o.user_id=u.id and o.order_id = d.orders_id
+    </select>
+
+
+    extends 继承某个 resultMap
+    <resultMap id="OrderDetailResultMap" type="com.freedom.po.Order" extends="OrdersUserResultMap">
+            <collection property="orderDetails" ofType="com.freedom.po.OrderDetail">
+                <id column="ordersDetails_id" property="id"/>
+                <result column="items_id" property="items_id"/>
+                <result column="items_num" property="items_num"/>
+                <result column="orders_id" property="orders_id"/>
+            </collection>
+    </resultMap>
+
+多对多查询
+集合中对应的
+ofType
+
