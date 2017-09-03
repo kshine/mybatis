@@ -42,3 +42,6 @@ association  property  映射到对应类里面的属性名称  javaType  对应
 集合中对应的
 ofType
 
+
+
+

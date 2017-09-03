@@ -24,4 +24,6 @@ public interface UserMapper {
     public void deleteUser(int id) throws Exception;
 
     public List<User> findUserByHashMap(HashMap<String,Object> hashMap) throws Exception;
+
+    public void updateUser(User user) throws Exception;
 }

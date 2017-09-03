@@ -16,4 +16,6 @@ public interface OrderMapper {
     public List<Order> findOrderDetailResultMap() throws Exception;
 
     public List<User> findUserItemsResultMap() throws Exception;
+
+    public List<Order> findOrderUserLazyLoad() throws Exception;
 }
